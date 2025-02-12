@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfvadgekaprhb"]
+
+[ext_resource type="Texture2D" uid="uid://bvmla047130vu" path="res://assets/blood (2).png" id="1_emuty"]
+[ext_resource type="Script" path="res://scripts/blood.gd" id="2_5saqs"]
+
+[node name="EnemyExplosion" type="Node2D"]
+
+[node name="explosionEffect" type="CPUParticles2D" parent="."]
+z_index = -5
+scale = Vector2(4, 4)
+amount = 45
+lifetime = 0.4
+explosiveness = 1.0
+randomness = 1.0
+texture = ExtResource("1_emuty")
+emission_shape = 2
+emission_sphere_radius = 0.01
+direction = Vector2(50, 100)
+spread = 25.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 52.0
+scale_amount_min = 0.5
+color = Color(0.843772, 0.354921, 0.388612, 1)
+script = ExtResource("2_5saqs")
+
+[node name="Timer" type="Timer" parent="explosionEffect"]
+wait_time = 0.2
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="explosionEffect/Timer" to="explosionEffect" method="_on_timer_timeout"]

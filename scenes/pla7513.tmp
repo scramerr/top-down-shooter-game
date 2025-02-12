@@ -1,0 +1,76 @@
+[gd_scene load_steps=12 format=3 uid="uid://dj7564kdl27r3"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_yl1h2"]
+[ext_resource type="Texture2D" uid="uid://bvs3tdrwedhud" path="res://assets/shooter_character.png" id="2_m21sv"]
+[ext_resource type="PackedScene" uid="uid://dqfebhfam47ig" path="res://scenes/gun.tscn" id="3_n3jtb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtrdj"]
+atlas = ExtResource("2_m21sv")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7vxtk"]
+atlas = ExtResource("2_m21sv")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mx824"]
+atlas = ExtResource("2_m21sv")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_orrkp"]
+atlas = ExtResource("2_m21sv")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7mjf"]
+atlas = ExtResource("2_m21sv")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65k7u"]
+atlas = ExtResource("2_m21sv")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6n0r8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtrdj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7vxtk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mx824")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_orrkp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7mjf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65k7u")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_37c1x"]
+size = Vector2(28.5, 25.625)
+
+[node name="player" type="CharacterBody2D"]
+position = Vector2(30, 24)
+script = ExtResource("1_yl1h2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(13, -2)
+scale = Vector2(2.8125, 2.4375)
+sprite_frames = SubResource("SpriteFrames_6n0r8")
+animation = &"idle"
+
+[node name="collision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(48.75, 30.1875)
+shape = SubResource("RectangleShape2D_37c1x")
+
+[node name="Gun" parent="." instance=ExtResource("3_n3jtb")]
+position = Vector2(29, 15)

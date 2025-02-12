@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgjvyisepjp2m"]
+
+[ext_resource type="Script" path="res://scripts/wave_manager.gd" id="1_mfpu7"]
+
+[node name="WaveManager" type="Node2D"]
+script = ExtResource("1_mfpu7")

@@ -1,0 +1,112 @@
+[gd_scene load_steps=7 format=3 uid="uid://c6bgkui2hwrun"]
+
+[ext_resource type="Script" path="res://scripts/ui.gd" id="1_o325c"]
+[ext_resource type="Texture2D" uid="uid://00umvsipft0n" path="res://assets/kenney_ui-pack-rpg-expansion/PNG/barYellow_horizontalMid.png" id="2_rw2f8"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_10064"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h0fix"]
+draw_center = false
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_letaa"]
+font_size = 35
+
+[sub_resource type="LabelSettings" id="LabelSettings_tp5ko"]
+font_size = 40
+shadow_size = 5
+shadow_offset = Vector2(1, 4)
+
+[node name="ui" type="CanvasLayer"]
+script = ExtResource("1_o325c")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="health_bar" type="TextureProgressBar" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.079
+anchor_bottom = 0.079
+offset_left = 50.0
+offset_top = -21.88
+offset_right = 257.0
+offset_bottom = 11.12
+max_value = 5.0
+value = 5.0
+nine_patch_stretch = true
+texture_under = ExtResource("2_rw2f8")
+texture_progress = SubResource("CanvasTexture_10064")
+tint_under = Color(0, 0, 0, 0.698039)
+tint_progress = Color(0.498039, 0, 0.0470588, 1)
+
+[node name="ProgressBar" type="ProgressBar" parent="Control/health_bar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.094
+anchor_top = 0.548
+anchor_right = -0.094
+anchor_bottom = 0.548
+offset_left = 16.458
+offset_top = -22.084
+offset_right = 229.458
+offset_bottom = 18.916
+theme_override_constants/outline_size = 5
+theme_override_styles/background = SubResource("StyleBoxFlat_h0fix")
+show_percentage = false
+
+[node name="Label" type="Label" parent="Control/health_bar"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 23.0
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "5/5
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="wave_heading" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -28.0
+offset_top = 20.0
+offset_right = 30.0
+offset_bottom = 43.0
+grow_horizontal = 2
+text = "WAVE 1"
+label_settings = SubResource("LabelSettings_letaa")
+
+[node name="wave_timer" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -25.0
+offset_top = 68.0
+offset_right = 26.0
+offset_bottom = 137.0
+grow_horizontal = 2
+text = "15"
+label_settings = SubResource("LabelSettings_tp5ko")
+horizontal_alignment = 1
+vertical_alignment = 1

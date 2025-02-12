@@ -1,0 +1,175 @@
+[gd_scene load_steps=18 format=3 uid="uid://dj7564kdl27r3"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_yl1h2"]
+[ext_resource type="Texture2D" uid="uid://wp557kb0ts6q" path="res://assets/blob-3.png" id="2_gfdxv"]
+[ext_resource type="Shader" path="res://assets/dissolve.gdshader" id="2_hxh45"]
+[ext_resource type="PackedScene" uid="uid://dqfebhfam47ig" path="res://scenes/shotgun.tscn" id="3_n3jtb"]
+[ext_resource type="Script" path="res://scripts/player_camera.gd" id="4_6ulkw"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yjlfs"]
+noise_type = 0
+frequency = 0.1442
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_eryc5"]
+width = 550
+height = 550
+in_3d_space = true
+noise = SubResource("FastNoiseLite_yjlfs")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o1twc"]
+shader = ExtResource("2_hxh45")
+shader_parameter/value = 0.0
+shader_parameter/center_offset = Vector2(0.25, -0.02)
+shader_parameter/custom_time = 0.0
+shader_parameter/noise = SubResource("NoiseTexture2D_eryc5")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5arl"]
+atlas = ExtResource("2_gfdxv")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6n0r8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5arl")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wjx45"]
+size = Vector2(46, 33)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k6x64"]
+shader = ExtResource("2_hxh45")
+shader_parameter/value = 0.796
+shader_parameter/center_offset = null
+shader_parameter/custom_time = null
+
+[sub_resource type="Animation" id="Animation_042fr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:material:shader_parameter/value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_t4lge"]
+resource_name = "gun_shrink"
+
+[sub_resource type="Animation" id="Animation_ra0qj"]
+resource_name = "shrink"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.2, 0.2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:material:shader_parameter/value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.6]
+}
+
+[sub_resource type="Animation" id="Animation_6vau6"]
+resource_name = "unshrink"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:material:shader_parameter/value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.6, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aacmb"]
+_data = {
+"RESET": SubResource("Animation_042fr"),
+"gun_shrink": SubResource("Animation_t4lge"),
+"shrink": SubResource("Animation_ra0qj"),
+"unshrink": SubResource("Animation_6vau6")
+}
+
+[node name="player" type="CharacterBody2D"]
+position = Vector2(0, 1)
+collision_mask = 7
+script = ExtResource("1_yl1h2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_o1twc")
+position = Vector2(7, 3)
+scale = Vector2(4.2, 4.281)
+sprite_frames = SubResource("SpriteFrames_6n0r8")
+animation = &"idle"
+
+[node name="collision" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -3.5)
+shape = SubResource("RectangleShape2D_wjx45")
+
+[node name="Gun" parent="." instance=ExtResource("3_n3jtb")]
+material = SubResource("ShaderMaterial_k6x64")
+position = Vector2(1, 18)
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+zoom = Vector2(1.15, 1.15)
+script = ExtResource("4_6ulkw")
+
+[node name="Timer" type="Timer" parent="PlayerCamera"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_aacmb")
+}
+
+[connection signal="timeout" from="PlayerCamera/Timer" to="PlayerCamera" method="_on_timer_timeout"]

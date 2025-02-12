@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://swnrdiu7ai8v"]
+
+[ext_resource type="Script" path="res://scripts/bullet.gd" id="1_reaga"]
+[ext_resource type="Texture2D" uid="uid://cgv4mt7rvs0r5" path="res://assets/Extras/bullet.png" id="2_djmcq"]
+[ext_resource type="PackedScene" uid="uid://6bmfnnyc0ok1" path="res://scenes/explosion.tscn" id="2_doqm6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6686l"]
+radius = 12.0
+height = 72.0
+
+[node name="bullet" type="Area2D"]
+collision_mask = 6
+script = ExtResource("1_reaga")
+impact_effect = ExtResource("2_doqm6")
+
+[node name="sprite" type="Sprite2D" parent="."]
+position = Vector2(4.76837e-07, -1.13687e-13)
+scale = Vector2(0.0185547, 0.00976562)
+texture = ExtResource("2_djmcq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_6686l")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

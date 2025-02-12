@@ -1,0 +1,82 @@
+[gd_scene load_steps=13 format=3 uid="uid://ckx1g0ywrp1n2"]
+
+[ext_resource type="Shader" path="res://scripts/shockwave.gdshader" id="1_achcy"]
+[ext_resource type="Script" path="res://scenes/shockwave_effect.gd" id="1_niu2s"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fhu4y"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5wcl7"]
+noise = SubResource("FastNoiseLite_fhu4y")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lp3dy"]
+shader = ExtResource("1_achcy")
+shader_parameter/color = Color(0.42, 0.1092, 0.32676, 1)
+shader_parameter/boundary_color = Color(0, 0, 0, 1)
+shader_parameter/value = 1.0
+shader_parameter/noise = SubResource("NoiseTexture2D_5wcl7")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ebgk0"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qhqc0"]
+material = SubResource("ShaderMaterial_ebgk0")
+size = Vector2(5, 5)
+orientation = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7bnll"]
+orientation = 2
+
+[sub_resource type="MeshTexture" id="MeshTexture_muq67"]
+mesh = SubResource("PlaneMesh_7bnll")
+
+[sub_resource type="Animation" id="Animation_h7ixh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_3rd65"]
+resource_name = "shockwave"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.5, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_arhd8"]
+_data = {
+"RESET": SubResource("Animation_h7ixh"),
+"shockwave": SubResource("Animation_3rd65")
+}
+
+[node name="ShockwaveEffect" type="Node2D"]
+script = ExtResource("1_niu2s")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+material = SubResource("ShaderMaterial_lp3dy")
+position = Vector2(1, 0)
+scale = Vector2(100, 100)
+mesh = SubResource("PlaneMesh_qhqc0")
+texture = SubResource("MeshTexture_muq67")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MeshInstance2D"]
+libraries = {
+"": SubResource("AnimationLibrary_arhd8")
+}

@@ -1,0 +1,98 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgw6pe80vmju6"]
+
+[ext_resource type="Script" path="res://scripts/upgrades.gd" id="1_3tj8c"]
+[ext_resource type="Texture2D" uid="uid://3n01uvbd18hf" path="res://assets/kenney_ui-pack-rpg-expansion/PNG/cursorSword_bronze.png" id="2_nahe3"]
+
+[node name="UpgradesScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3tj8c")
+
+[node name="LevelUpTitle" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.362
+anchor_right = 0.5
+anchor_bottom = 0.362
+offset_left = -35.5
+offset_top = -54.64
+offset_right = 35.5
+offset_bottom = -31.64
+grow_horizontal = 2
+grow_vertical = 2
+text = "Level Up!"
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.5
+offset_top = -49.5
+offset_right = 202.5
+offset_bottom = 49.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="GridContainer2" type="GridContainer" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/GridContainer/GridContainer2"]
+layout_mode = 2
+text = "shotgun upgrade"
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/GridContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("2_nahe3")
+expand_mode = 4
+
+[node name="Button" type="Button" parent="PanelContainer/GridContainer/GridContainer2"]
+layout_mode = 2
+text = "CHOOSE"
+
+[node name="GridContainer3" type="GridContainer" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/GridContainer/GridContainer3"]
+layout_mode = 2
+text = "shotgun upgrade"
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/GridContainer/GridContainer3"]
+layout_mode = 2
+texture = ExtResource("2_nahe3")
+expand_mode = 4
+
+[node name="Button" type="Button" parent="PanelContainer/GridContainer/GridContainer3"]
+layout_mode = 2
+text = "CHOOSE"
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/GridContainer/GridContainer"]
+layout_mode = 2
+text = "shotgun upgrade"
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/GridContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("2_nahe3")
+expand_mode = 4
+
+[node name="Button" type="Button" parent="PanelContainer/GridContainer/GridContainer"]
+layout_mode = 2
+text = "CHOOSE"
+
+[connection signal="pressed" from="PanelContainer/GridContainer/GridContainer2/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PanelContainer/GridContainer/GridContainer3/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PanelContainer/GridContainer/GridContainer/Button" to="." method="_on_button_pressed"]

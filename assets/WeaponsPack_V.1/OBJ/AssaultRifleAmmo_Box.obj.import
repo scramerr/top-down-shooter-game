@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://desisdw8p8hrp"
+path="res://.godot/imported/AssaultRifleAmmo_Box.obj-20eb3797dd1a1aaa566716c8e8574d54.mesh"
+
+[deps]
+
+files=["res://.godot/imported/AssaultRifleAmmo_Box.obj-20eb3797dd1a1aaa566716c8e8574d54.mesh"]
+
+source_file="res://assets/WeaponsPack_V.1/OBJ/AssaultRifleAmmo_Box.obj"
+dest_files=["res://.godot/imported/AssaultRifleAmmo_Box.obj-20eb3797dd1a1aaa566716c8e8574d54.mesh", "res://.godot/imported/AssaultRifleAmmo_Box.obj-20eb3797dd1a1aaa566716c8e8574d54.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

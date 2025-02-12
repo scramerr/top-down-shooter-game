@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://bsc5nfx72l14n"]
+
+[ext_resource type="Script" path="res://scripts/orb.gd" id="1_14tpl"]
+[ext_resource type="Shader" path="res://scripts/orb.gdshader" id="3_x7g83"]
+[ext_resource type="Texture2D" uid="uid://wp557kb0ts6q" path="res://assets/blob-3.png" id="4_5u052"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_62egc"]
+shader = ExtResource("3_x7g83")
+shader_parameter/custom_time = 10.0
+shader_parameter/time_speed = 80.0
+shader_parameter/main_color = Vector4(0.7, 0.25, 1, 1)
+shader_parameter/glow_intensity = 1.0
+shader_parameter/distortion_amount = 0.2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kor4e"]
+atlas = ExtResource("4_5u052")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mv40k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kor4e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tpkft"]
+radius = 308.026
+
+[node name="orb" type="CharacterBody2D"]
+script = ExtResource("1_14tpl")
+
+[node name="orbSprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_62egc")
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_mv40k")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+modulate = Color(1, 0.92, 0.92, 1)
+shape = SubResource("CircleShape2D_tpkft")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

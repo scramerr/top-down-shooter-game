@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://6bmfnnyc0ok1"]
+
+[sub_resource type="Curve" id="Curve_wamms"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.425926, 0.355945), 0.0, 0.0, 0, 0, Vector2(0.577778, 0.93064), 0.0, 0.0, 0, 0, Vector2(0.992701, 0.0172155), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[node name="explosion" type="Node2D"]
+
+[node name="bulletEffect" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 5
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+emission_shape = 2
+emission_sphere_radius = 0.01
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 80.0
+scale_amount_min = 4.0
+scale_amount_max = 6.0
+scale_amount_curve = SubResource("Curve_wamms")
+color = Color(1, 0.490196, 0.109804, 1)
+hue_variation_min = -0.07
+hue_variation_max = 0.84
+
+[node name="Camera2D" type="Camera2D" parent="."]

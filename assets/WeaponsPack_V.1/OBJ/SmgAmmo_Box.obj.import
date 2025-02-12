@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ddlosipm6p28l"
+path="res://.godot/imported/SmgAmmo_Box.obj-064b6f0851f71c3dff8e9eb373f1f375.mesh"
+
+[deps]
+
+files=["res://.godot/imported/SmgAmmo_Box.obj-064b6f0851f71c3dff8e9eb373f1f375.mesh"]
+
+source_file="res://assets/WeaponsPack_V.1/OBJ/SmgAmmo_Box.obj"
+dest_files=["res://.godot/imported/SmgAmmo_Box.obj-064b6f0851f71c3dff8e9eb373f1f375.mesh", "res://.godot/imported/SmgAmmo_Box.obj-064b6f0851f71c3dff8e9eb373f1f375.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
